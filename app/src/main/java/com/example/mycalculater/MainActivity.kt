@@ -1,6 +1,7 @@
 package com.example.mycalculater
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         input = findViewById(R.id.input)
         input.text = ""
         setup()
+        Log.d("mainactivity","oncreate")
     }
     private fun setup() {
 
