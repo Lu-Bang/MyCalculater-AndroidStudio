@@ -209,11 +209,11 @@ class MainActivity : AppCompatActivity() {
             "" -> {
                 finalResult=var1
             }
-            "+", "++", "--" -> {
+            "+" -> {
                 result = var1.toFloat() + var2.toFloat()
                 finalResult = result.toString()
             }
-            "-", "+-", "-+" -> {
+            "-" -> {
                 result = var1.toFloat() - var2.toFloat()
                 finalResult = result.toString()
             }
