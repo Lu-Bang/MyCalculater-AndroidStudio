@@ -1,9 +1,11 @@
 package com.example.mycalculater
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -18,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         input = findViewById(R.id.input)
         input.text = ""
         setup()
-        Log.d("mainactivity","oncreate")
     }
     private fun setup() {
 
@@ -201,6 +202,14 @@ class MainActivity : AppCompatActivity() {
         result.setOnClickListener {
             input.text = getResult()
         }
+        val history = findViewById<ImageButton>(R.id.history)
+        history.setOnClickListener {
+            goToHistory()
+        }
+    }
+    private fun goToHistory() {
+        val intent = Intent(this,HistoryActivity::class.java)
+        startActivity(intent)
     }
     private fun getResult(): String {
         val result: Float
