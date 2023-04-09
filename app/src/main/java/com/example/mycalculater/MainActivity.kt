@@ -21,7 +21,6 @@ abstract class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         input = findViewById(R.id.input)
-        input.text = ""
         setup()
     }
     private fun setup() {
@@ -166,7 +165,7 @@ abstract class MainActivity : AppCompatActivity() {
                 var2 += "0"
             }
         }
-        val clear = this.findViewById<Button>(R.id.buttonAC)
+        val clear = findViewById<Button>(R.id.buttonAC)
         clear.setOnClickListener {
             var1 = ""
             var2 = ""
