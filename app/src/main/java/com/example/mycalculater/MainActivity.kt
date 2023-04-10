@@ -9,7 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 
-abstract class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var input: TextView
     private var var1 = ""
     private var var2 = ""
