@@ -202,7 +202,7 @@ class MainActivity : AppCompatActivity() {
         }
         val result = findViewById<Button>(R.id.buttonResult)
         result.setOnClickListener {
-            val value = input.text.toString() + getResult()
+            val value = input.text.toString() + " = " + getResult()
             listResult.add(value)
             input.text = getResult()
         }
