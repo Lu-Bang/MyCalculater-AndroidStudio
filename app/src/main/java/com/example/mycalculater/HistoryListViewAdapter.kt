@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import java.text.SimpleDateFormat
+import java.util.*
 
-class HistoryAdapter(listResult: List<String>, context: Context) : BaseAdapter() {
+class HistoryListViewAdapter(listResult: List<String>, context: Context) : BaseAdapter() {
     private var listResult: List<String> = emptyList()
     private var context: Context
 
@@ -34,7 +36,9 @@ class HistoryAdapter(listResult: List<String>, context: Context) : BaseAdapter()
         val title = convertView.findViewById<TextView>(R.id.title)
         title.text = item
         val time = convertView.findViewById<TextView>(R.id.time)
-        time.text = "09/12/2003"
+        val currentTime = Calendar.getInstance().time
+        val format = SimpleDateFormat("dd/MM/yyyy")
+        time.text = format.format(currentTime).toString()
         return convertView
     }
 }

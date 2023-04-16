@@ -212,7 +212,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun goToHistory() {
-        val intent = Intent(this,HistoryActivity::class.java)
+        val intent = Intent(this,HistoryRecycleViewActivity::class.java)
         intent.putExtra("key_result", listResult.toTypedArray())
         resultLauncherLamda.launch(intent)
     }
