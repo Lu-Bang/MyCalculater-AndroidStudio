@@ -2,11 +2,16 @@ package com.example.mycalculater
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.example.mycalculater.model.CalculaterResult
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -14,14 +19,33 @@ class MainActivity : AppCompatActivity() {
     private var var1 = ""
     private var var2 = ""
     private var method = ""
-    private var listResult: ArrayList<String> = arrayListOf()
+    private var listResult: ArrayList<CalculaterResult> = arrayListOf()
     private var resultLauncherLamda = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
+        setSupportActionBar(toolbar)
         input = findViewById(R.id.input)
         setup()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.acion_history -> {
+                goToHistory()
+            }
+            else -> {
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
     private fun setup() {
 
@@ -202,18 +226,16 @@ class MainActivity : AppCompatActivity() {
         }
         val result = findViewById<Button>(R.id.buttonResult)
         result.setOnClickListener {
-            val value = input.text.toString() + " = " + getResult()
-            listResult.add(value)
+            val result = input.text.toString() + " = " + getResult()
+            val time = Calendar.getInstance()
+            val format = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+            listResult.add(CalculaterResult(result, format.format(time.time)))
             input.text = getResult()
-        }
-        val history = findViewById<ImageButton>(R.id.history)
-        history.setOnClickListener {
-            goToHistory()
         }
     }
     private fun goToHistory() {
         val intent = Intent(this,HistoryRecycleViewActivity::class.java)
-        intent.putExtra("key_result", listResult.toTypedArray())
+        intent.putExtra("key_result", listResult)
         resultLauncherLamda.launch(intent)
     }
     private fun getResult(): String {
