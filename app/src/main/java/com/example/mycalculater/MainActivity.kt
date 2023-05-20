@@ -19,14 +19,35 @@ class MainActivity : AppCompatActivity() {
     private var var1 = ""
     private var var2 = ""
     private var method = ""
+    private var value = ""
     private var listResult: ArrayList<CalculaterResult> = arrayListOf()
     private var resultLauncherLamda = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
     }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putSerializable("key_result", listResult)
+        outState.putString("var1",var1)
+        outState.putString("var2",var2)
+        outState.putString("method",method)
+        super.onSaveInstanceState(outState)
+    }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        listResult = savedInstanceState.getSerializable("key_result") as? ArrayList<CalculaterResult> ?: arrayListOf()
+//        var value = var1 + method + var2
+//        input.text = value
+        input.text = listResult.last().result
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
         setSupportActionBar(toolbar)
+        if (savedInstanceState != null) {
+            var1 = savedInstanceState.getString("var1").toString()
+            var2 = savedInstanceState.getString("var2").toString()
+            method = savedInstanceState.getString("method").toString()
+        }
         input = findViewById(R.id.input)
         setup()
     }
